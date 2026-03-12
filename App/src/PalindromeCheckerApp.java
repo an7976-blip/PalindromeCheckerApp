@@ -1,37 +1,34 @@
 import java.util.Scanner;
-import java.util.Deque;
 import java.util.LinkedList;
 /**
  * =====================================================
- * MAIN CLASS - UseCase7PalindromeCheckerApp
+ * MAIN CLASS - UseCase8PalindromeCheckerApp
  * =====================================================
  *
- * Use Case 7: Deque-Based Optimized Palindrome Checker
+ * Use Case 8: Linked List Based Palindrome Checker
  *
  * Description:
  * This class demonstrates palindrome validation using
- * a Deque (Double Ended Queue) data structure.
+ * a Linked List data structure.
  *
- * A Deque allows insertion and removal of elements
- * from both the front and rear ends.
- *
- * Characters are inserted into the deque and then
- * compared by removing from both ends simultaneously.
+ * Characters of the input string are inserted into the
+ * linked list and then compared using the two-pointer
+ * technique from both ends of the list.
  *
  * If all characters match, the input string is confirmed
  * as a palindrome.
  *
- * This use case demonstrates efficient symmetric
- * comparison using a single optimized data structure.
+ * This use case demonstrates how linked lists can be
+ * used for sequential storage and symmetric comparison.
  *
  * @author Hari
- * @version 7.0
+ * @version 8.0
  */
 
 public class PalindromeCheckerApp {
 
     /**
-     * Application entry point for UC7 .
+     * Application entry point for UC8 .
      *
      * @param args Command-line arguments
      */
@@ -40,22 +37,22 @@ public class PalindromeCheckerApp {
 
         Scanner scanner = new Scanner(System.in);
 
-        Deque<Character> deque = new LinkedList<>();
+        LinkedList<Character> list = new LinkedList<>();
 
         // Take user input
         System.out.print("Enter a string: ");
         String input = scanner.nextLine();
 
-        // Insert characters into deque
+        // Insert characters into LinkedList
         for (int i = 0; i < input.length(); i++) {
-            deque.addLast(input.charAt(i));
+            list.add(input.charAt(i));
         }
 
         boolean isPalindrome = true;
 
-        // Compare characters from both ends
-        while (deque.size() > 1) {
-            if (deque.removeFirst() != deque.removeLast()) {
+        // Two-pointer approach using LinkedList
+        while (list.size() > 1) {
+            if (!list.removeFirst().equals(list.removeLast())) {
                 isPalindrome = false;
                 break;
             }
