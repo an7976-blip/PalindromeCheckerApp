@@ -1,36 +1,41 @@
 import java.util.Scanner;
 /**
  * =====================================================
- * MAIN CLASS - UseCase11PalindromeCheckerApp
+ * MAIN CLASS - UseCase12PalindromeCheckerApp
  * =====================================================
  *
- * Use Case 11: Object-Oriented Palindrome Service
+ * Use Case 12: Strategy Pattern for Palindrome Algorithms
  *
  * Description:
  * This class demonstrates palindrome validation using
- * Object-Oriented Programming principles.
+ * the Strategy Design Pattern.
  *
- * The palindrome checking logic is separated into a
- * service class, which improves modularity,
- * reusability, and maintainability of the code.
+ * Different palindrome checking algorithms can be
+ * implemented as separate strategies. The main program
+ * selects and uses one strategy dynamically.
  *
- * The main class handles user input and output,
- * while the service class performs the palindrome
- * validation logic.
+ * This approach improves flexibility and allows
+ * easy extension of new palindrome algorithms
+ * without modifying existing code.
  *
  * If the characters match symmetrically,
  * the input string is confirmed as a palindrome.
  *
- * This use case demonstrates how OOP design can
- * organize program logic into reusable components.
+ * This use case demonstrates how design patterns
+ * help organize algorithms in a modular way.
  *
  * @author Hari
- * @version 11.0
+ * @version 12.0
  */
 
-class PalindromeService {
+// Strategy Interface
+interface PalindromeStrategy {
+    boolean isPalindrome(String input);
+}
 
-    // Method to check palindrome
+// Concrete Strategy Implementation
+class SimplePalindromeStrategy implements PalindromeStrategy {
+
     public boolean isPalindrome(String input) {
 
         int start = 0;
@@ -51,7 +56,7 @@ class PalindromeService {
 public class PalindromeCheckerApp {
 
     /**
-     * Application entry point for UC11 .
+     * Application entry point for UC12 .
      *
      * @param args Command-line arguments
      */
@@ -60,14 +65,14 @@ public class PalindromeCheckerApp {
 
         Scanner scanner = new Scanner(System.in);
 
-        // Create service object
-        PalindromeService service = new PalindromeService();
+        // Choose strategy
+        PalindromeStrategy strategy = new SimplePalindromeStrategy();
 
         // Take user input
         System.out.print("Enter a string: ");
         String input = scanner.nextLine();
 
-        boolean isPalindrome = service.isPalindrome(input);
+        boolean isPalindrome = strategy.isPalindrome(input);
 
         // Print result
         if (isPalindrome) {
