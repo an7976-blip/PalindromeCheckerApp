@@ -1,42 +1,71 @@
 import java.util.Scanner;
 /**
  * =====================================================
- * MAIN CLASS - UseCase12PalindromeCheckerApp
+ * MAIN CLASS - UseCase13PalindromeCheckerApp
  * =====================================================
  *
- * Use Case 12: Strategy Pattern for Palindrome Algorithms
+ * Use Case 13: Performance Comparison
  *
  * Description:
- * This class demonstrates palindrome validation using
- * the Strategy Design Pattern.
+ * This class demonstrates performance comparison
+ * between two palindrome checking approaches.
  *
- * Different palindrome checking algorithms can be
- * implemented as separate strategies. The main program
- * selects and uses one strategy dynamically.
+ * The execution time of each algorithm is measured
+ * using System.nanoTime().
  *
- * This approach improves flexibility and allows
- * easy extension of new palindrome algorithms
- * without modifying existing code.
+ * The program compares:
+ * - Iterative two-pointer palindrome algorithm
+ * - Recursive palindrome algorithm
  *
- * If the characters match symmetrically,
- * the input string is confirmed as a palindrome.
+ * The execution times are displayed so that users
+ * can observe the performance difference between
+ * the algorithms.
  *
- * This use case demonstrates how design patterns
- * help organize algorithms in a modular way.
+ * This use case helps understand algorithm efficiency
+ * and time measurement in Java.
  *
  * @author Hari
- * @version 12.0
+ * @version 13.0
  */
 
-// Strategy Interface
-interface PalindromeStrategy {
-    boolean isPalindrome(String input);
-}
+public class PalindromeCheckerApp {
 
-// Concrete Strategy Implementation
-class SimplePalindromeStrategy implements PalindromeStrategy {
+    /**
+     * Application entry point for UC13 .
+     *
+     * @param args Command-line arguments
+     */
 
-    public boolean isPalindrome(String input) {
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        // Take user input
+        System.out.print("Enter a string: ");
+        String input = scanner.nextLine();
+
+        // Iterative method timing
+        long startTime1 = System.nanoTime();
+        boolean iterativeResult = iterativePalindrome(input);
+        long endTime1 = System.nanoTime();
+
+        // Recursive method timing
+        long startTime2 = System.nanoTime();
+        boolean recursiveResult = recursivePalindrome(input, 0, input.length() - 1);
+        long endTime2 = System.nanoTime();
+
+        // Print results
+        System.out.println("\nIterative Method Result: " + iterativeResult);
+        System.out.println("Iterative Execution Time: " + (endTime1 - startTime1) + " ns");
+
+        System.out.println("\nRecursive Method Result: " + recursiveResult);
+        System.out.println("Recursive Execution Time: " + (endTime2 - startTime2) + " ns");
+
+        scanner.close();
+    }
+
+    // Iterative palindrome check
+    public static boolean iterativePalindrome(String input) {
 
         int start = 0;
         int end = input.length() - 1;
@@ -51,36 +80,18 @@ class SimplePalindromeStrategy implements PalindromeStrategy {
 
         return true;
     }
-}
 
-public class PalindromeCheckerApp {
+    // Recursive palindrome check
+    public static boolean recursivePalindrome(String input, int start, int end) {
 
-    /**
-     * Application entry point for UC12 .
-     *
-     * @param args Command-line arguments
-     */
-
-    public static void main(String[] args) {
-
-        Scanner scanner = new Scanner(System.in);
-
-        // Choose strategy
-        PalindromeStrategy strategy = new SimplePalindromeStrategy();
-
-        // Take user input
-        System.out.print("Enter a string: ");
-        String input = scanner.nextLine();
-
-        boolean isPalindrome = strategy.isPalindrome(input);
-
-        // Print result
-        if (isPalindrome) {
-            System.out.println(input + " is a Palindrome.");
-        } else {
-            System.out.println(input + " is not a Palindrome.");
+        if (start >= end) {
+            return true;
         }
 
-        scanner.close();
+        if (input.charAt(start) != input.charAt(end)) {
+            return false;
+        }
+
+        return recursivePalindrome(input, start + 1, end - 1);
     }
 }
