@@ -26,7 +26,7 @@ import java.util.LinkedList;
  * This use case helps understand how FIFO and LIFO
  * behaviors can be combined for symmetric comparison.
  *
- * @author Developer
+ * @author Hari
  * @version 6.0
  */
 
